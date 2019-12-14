@@ -2,31 +2,33 @@
 using UnityEngine;
 
 /// <summary>
-/// Gradient Constant should always be negative
+/// 
 /// </summary>
-
+/// <remarks>Gradient Constant should always be negative</remarks>
 public class XSquareCurve : Curve 
 {
-	public XSquareCurve (curvedetail curveDetails) : base (curveDetails){}
+	public XSquareCurve (float gradientConstant, float x_displacement, float equilibrium_y, float equilibrium_x) : base (gradientConstant, x_displacement, equilibrium_y, equilibrium_x) {
+        InitializeYDisplacement();
+    }
 
-	public override int calculateY(int x)
+	public override float calculateY(int x)
 	{
-		return (int)(curveDetails.gradientConstant * Math.Pow (x, 2.0) + y_displacement);
+		return (float)(gradientConstant * Math.Pow (x, 2.0) + y_displacement);
 	}
 
-	protected override int calculateYDisplacement()
+	protected override void InitializeYDisplacement()
 	{
-		return (int)(curveDetails.equilibrium_y - curveDetails.gradientConstant * Math.Pow (curveDetails.equilibrium_x, 2.0));
+		y_displacement = (float)(equilibrium_y - gradientConstant * Math.Pow (equilibrium_x, 2.0));
 	}
 
 	public override float GetGradient()
 	{
-		return curveDetails.gradientConstant;
+		return gradientConstant;
 	}
 
 	public float GetGradient(int x_value)
 	{
-		return 2 * curveDetails.gradientConstant * x_value;
+		return 2 * gradientConstant * x_value;
 	}
 
 	public override float calculateAreaUnderCurve(int initialX, int finalX)
@@ -41,6 +43,6 @@ public class XSquareCurve : Curve
 	/// <param name="x">The upper or lower bound of the integral.</param>
 	private float CalculateIntegral(int x_value)
 	{
-		return (float)(curveDetails.gradientConstant * Math.Pow (x_value, 3.0) / 3.0 + y_displacement * x_value);
+		return (float)(gradientConstant * Math.Pow (x_value, 3.0) / 3.0 + y_displacement * x_value);
 	}
 }

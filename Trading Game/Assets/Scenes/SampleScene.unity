@@ -113,49 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &116639703
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 116639705}
-  - component: {fileID: 116639704}
-  m_Layer: 0
-  m_Name: MarketController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &116639704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 116639703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8ccd4a2227c0647bd5b8d665e2008d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  marketGameObjects:
-  - {fileID: 474910375}
-  - {fileID: 1041438545}
---- !u!4 &116639705
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 116639703}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,147 +251,145 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &474910375
+--- !u!1001 &421778588
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464236071548372, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_Name
+      value: Luebeck
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &749976243
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858015155569974, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464236071548372, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+      propertyPath: m_Name
+      value: Gdansk
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: GrainInitialAmount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: IronInitialAmount
+      value: 80
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1608117060
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 474910377}
-  - component: {fileID: 474910376}
+  - component: {fileID: 1608117062}
+  - component: {fileID: 1608117061}
   m_Layer: 0
-  m_Name: Luebeck
+  m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!114 &474910376
+--- !u!114 &1608117061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 474910375}
+  m_GameObject: {fileID: 1608117060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028ea732e0f89d340a00d8de6ffcd7b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 3873fc330167b504c82056b0f0fdfd44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grainDetails: {fileID: 11400000, guid: 80dc8f01c7f459347b42bfc7c562738e, type: 2}
-  beerDetails: {fileID: 11400000, guid: a03a0c471e1c1794984f8ffc8b0562cf, type: 2}
-  ironDetails: {fileID: 11400000, guid: 29b93a0a273426e478852e5436971575, type: 2}
-  grainInitialAmount: 30
-  beerInitialAmount: 30
-  ironInitialAmount: 50
-  grainConsumption: 3
-  beerConsumption: 5
-  ironConsumption: 1
-  grainProduction: 1
-  beerProduction: 1
-  ironProduction: 5
---- !u!4 &474910377
+--- !u!4 &1608117062
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 474910375}
+  m_GameObject: {fileID: 1608117060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1041438545
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1041438547}
-  - component: {fileID: 1041438546}
-  m_Layer: 0
-  m_Name: Gdansk
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1041438546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1041438545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028ea732e0f89d340a00d8de6ffcd7b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grainDetails: {fileID: 11400000, guid: 80dc8f01c7f459347b42bfc7c562738e, type: 2}
-  beerDetails: {fileID: 11400000, guid: a03a0c471e1c1794984f8ffc8b0562cf, type: 2}
-  ironDetails: {fileID: 11400000, guid: 29b93a0a273426e478852e5436971575, type: 2}
-  grainInitialAmount: 40
-  beerInitialAmount: 50
-  ironInitialAmount: 30
-  grainConsumption: 1
-  beerConsumption: 2
-  ironConsumption: 3
-  grainProduction: 3
-  beerProduction: 5
-  ironProduction: 1
---- !u!4 &1041438547
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1041438545}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1318858623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1318858625}
-  - component: {fileID: 1318858624}
-  m_Layer: 0
-  m_Name: View
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1318858624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1318858623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b20fa0fcc63d1694cb9f28533eae3d23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1318858625
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1318858623}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

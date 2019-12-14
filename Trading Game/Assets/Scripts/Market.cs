@@ -1,163 +1,136 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Reflection;
 using System;
 
+
+/// <summary>
+/// Resource Market that handles buying and selling of resources
+/// It inherits from MonoBehaviour so that we can use coroutines to automate resource quantity change in this class.
+/// </summary>
 public class Market : MonoBehaviour {
 
-	public Dictionary<string, Resources> resourceList = new Dictionary<string, Resources>();
+    public static Dictionary<string, Market> markets
+    {
+        get;
+        private set;
+    }
 
-	private static readonly string[,] resources = {{"grain", "StraightCurve"}, {"beer", "StraightCurve"}, {"iron", "XSquareCurve"}};
+	private Dictionary<string, Resources> resourceList = new Dictionary<string, Resources>();
 
-	public CurveDetails grainDetails;
-	public CurveDetails beerDetails;
-	public CurveDetails ironDetails;
+	public int GrainInitialAmount = 30;
+    public int GrainConsumption = 3;
+    public int GrainProduction = 1;
+    public const float GrainEquilibriumPrice = 35;
+    public const float GrainEquilibriumQty = 60;
+    public const float GrainPriceElasticity = -1;
 
-	public int grainInitialAmount = 30;
-	public int beerInitialAmount = 30;
-	public int ironInitialAmount = 30;
+    public int BeerInitialAmount = 40;
+    public int BeerConsumption = 5;
+    public int BeerProduction = 1;
+    public const float BeerEquilibriumPrice = 50f;
+    public const float BeerEquilibriumQty = 60;
+    public const float BeerPriceElasticity = -1;
 
-	public int grainConsumption = 3;
-	public int beerConsumption = 5;
-	public int ironConsumption = 3;
+    public int IronInitialAmount = 30;
+    public int IronConsumption = 3;
+    public int IronProduction = 1;
+    public const float IronEquilibriumPrice = 100f;
+    public const float IronEquilibriumQty = 60;
+    public const float IronPriceElasticity = -0.01f;
 
-	public int grainProduction = 1;
-	public int beerProduction = 1;
-	public int ironProduction = 1;
+    public static readonly string[] resourceNames = {"Beer", "Iron", "Grain"};
 
-	private System.Collections.IEnumerator resourceUpdater;
+    public void Awake()
+    {
+        if (markets == null)
+            markets = new Dictionary<string, Market>();
 
-	public static string[] stateAvailableResources(){
-		string[] resourceList = new string[resources.GetLength(0)];
-		for (var i = 0; i < resources.GetLength (0); i++) {
-			resourceList[i] = resources [i, 0];
-		}
-		return resourceList;
-	}
+        markets.Add(name, this);
 
-	void Awake () 
+        foreach (var name in resourceNames)
+        {
+            int initialAmount = GetAttribute<int>(string.Format("{0}InitialAmount", name));
+            float equilibrium_price = GetAttribute<float>(string.Format("{0}EquilibriumPrice", name));
+            float equilibrium_qty = GetAttribute<float>(string.Format("{0}EquilibriumQty", name));
+            float price_elasticity = GetAttribute<float>(string.Format("{0}PriceElasticity", name));
+            resourceList.Add(name, Resources.createNewResourceByName(name, new float[]{ initialAmount, equilibrium_price, equilibrium_qty, price_elasticity, 0, 0}));
+        }
+    }
+
+    /// <summary>
+    /// used during initialization to get the field values for initializing the respective resources via reflection
+    /// </summary>
+    /// <typeparam name="T">market objects field type that we wish to return</typeparam>
+    /// <param name="_name">name of the field we wish to return</param>
+    /// <returns>value of the specified field</returns>
+    private T GetAttribute<T>(string _name)
+    {
+        
+        return (T)GetType().GetField(_name).GetValue(this);
+    }
+
+    /// <summary>
+    /// Get the price of the stated resource
+    /// </summary>
+    /// <param name="resource">name of the resource</param>
+    /// <param name="qty">quantity of the resource to calculate the price of</param>
+    /// <returns>
+    /// Returns the total price for the stated quantity of resource
+    /// returns -1 if the resource is not found, 
+    /// returns -2 if the calculateTotalPrice() operation returns 0
+    /// </returns>
+    public float getPrice(string resource, int qty)
+    {
+        if (resourceList.ContainsKey(resource))
+        {
+            float price = resourceList[resource].calculateTotalPrice(qty);
+            return (price > 0) ? price : -2; 
+        }
+
+        return -1;
+    }
+
+    /// <summary>
+    /// Get the total quanitity of the stated resource
+    /// </summary>
+    /// <param name="resource">name of the resource</param>
+    /// <returns>Returns the total quantity of the stated resource, returns -1 if the resource is not found</returns>
+    public int getQuantity(string resource)
+    {
+        return (resourceList.ContainsKey(resource)) ? resourceList[resource].getState(): -1;
+    }
+
+    /// <summary>
+    /// Decrease the Quantity of the specified resource
+    /// </summary>
+    /// <param name="resource">name of the resource to update the quantity of</param>
+    /// <param name="quantity">amount by which to update the stated resource</param>
+    /// <returns>Returns the status in boolean of whether the Resource operation was successful or not</returns>
+    public bool DecreaseQuantity(string resource, int quantity)
 	{
-		//resourceList.Add ("Grain", createNewResourceByName("Grain", grainInitialAmount, grainDetails.equilibrium_x, new StraightCurve(grainDetails)));
-		//resourceList.Add ("Beer", createNewResourceByName("Beer", beerInitialAmount, BeerDetails.equilibrium_x, new StraightCurve(BeerDetails)));
-		//resourceList.Add ("Iron", createNewResourceByName("Iron", ironInitialAmount, IronDetails.equilibrium_x, new XSquareCurve(IronDetails)));
+           if (resourceList.ContainsKey(resource)) {
+                int currentQuantity = resourceList[resource].getState();
 
-		for(var i=0; i<resources.GetLength(0); i++){
-			
-			string resourceName = resources [i, 0];
-			int initAmt = GetAttribute<int> (String.Format ("{0}InitialAmount", resourceName));
+                if (currentQuantity > 0 && currentQuantity - quantity >= 0)
+                    return resourceList[resource].DecreaseQuantity(quantity);
+           }
 
-			CurveDetails curveDetails = GetAttribute<CurveDetails> (String.Format ("{0}Details", resourceName));
-			Curve curve = createCurveByName (resources [i, 1], curveDetails);
-
-			Resources resourceToAdd = createNewResourceByName (resourceName.Substring(0,1).ToUpper() + resourceName.Substring(1), initAmt, curveDetails.equilibrium_x, curve);
-
-			resourceList.Add (resourceName, resourceToAdd);
-		}
+	    return false;
 	}
 
-	public void startResourceUpdate(float updateEverySecond){
-		if (resourceUpdater == null) {
-			resourceUpdater = MarketResourceUpdate (updateEverySecond);
-			StartCoroutine (resourceUpdater);
-		}  
-	}
-
-	public void stopResourceUpdate(){
-		if(resourceUpdater!=null){
-			StopCoroutine (resourceUpdater);
-			resourceUpdater = null;
-		}
-	}
-
-	public bool isResourceUpdating(){
-		return resourceUpdater != null;
-	}
-		
-
-	public T GetAttribute<T> ( string _name ) {
-		return (T)typeof(Market).GetField( _name ).GetValue (this);
-	} 
-
-	private Resources createNewResourceByName(string resourceName, int initialAmount, int equilibrium_quantity, Curve curve)
+    /// <summary>
+    /// Increase the Quantity of the specified resource
+    /// </summary>
+    /// <param name="resource">name of the resource to update the quantity of</param>
+    /// <param name="quantity">amount by which to update the stated resource</param>
+    /// <returns>Returns the status in boolean of whether the Resource operation was successful or not</returns>
+    public bool IncreaseQuantity(string resource, int quantity)
 	{
-		return (Resources) Activator.CreateInstance (Type.GetType (resourceName), initialAmount, equilibrium_quantity, curve); 
+        return (resourceList.ContainsKey(resource)) ? resourceList[resource].IncreaseQuantity(quantity) : false;
 	}
 
-	private Curve createCurveByName(string curveName, CurveDetails curveDetails)
-	{
-		return (Curve) Activator.CreateInstance (Type.GetType (curveName), new curvedetail(curveDetails)); 
-	}
-
-	public bool DecreaseQuantity(string resource, int quantity)
-	{
-		int currentQuantity = resourceList[resource].getState();
-
-		if (resourceList.ContainsKey (resource) && currentQuantity > 0 && currentQuantity - quantity >= 0) {
-			resourceList [resource].minusResources (quantity);	
-			return true;
-		}
-		return false;
-	}
-
-	public bool IncreaseQuantity(string resource, int quantity)
-	{
-		if (resourceList.ContainsKey (resource)) {
-			resourceList [resource].increaseResources (quantity);
-			return true;
-		}
-		return false;
-	}
-
-	private System.Collections.IEnumerator MarketResourceUpdate(float waitTime)
-	{
-		while (true) {
-
-			yield return new WaitForSeconds(waitTime);
-
-			foreach (var keypair in resourceList) {
-
-				if (rand (0, 10) > 4)
-					ResourceInflow (keypair.Key);
-				else
-					ResourceOutflow (keypair.Key);
-
-				yield return new WaitForSeconds(waitTime);
-			}
-		}
-	}
-
-	private void ResourceInflow(string resourceName)
-	{
-		Type type = typeof(Market);
-		FieldInfo fieldInfo = type.GetField (String.Format("{0}Production", resourceName.ToLower ()));
-		resourceList[resourceName].increaseResources (rand(1, (int)fieldInfo.GetValue (this)));
-	}
-
-	private void ResourceOutflow(string resourceName)
-	{
-		Type type = typeof(Market);
-		FieldInfo fieldInfo = type.GetField (String.Format("{0}Consumption", resourceName.ToLower ()));
-		resourceList[resourceName].minusResources (rand(1, (int)fieldInfo.GetValue (this)));
-	}
-
-	private int rand(int min, int max){
-		return UnityEngine.Random.Range (min, max);
-	}
-}
-
-public struct curvedetail{
-	public float gradientConstant;
-	public float x_displacement;
-
-	public int equilibrium_x;
-	public int equilibrium_y;
-	public int y_intercept;
-
-	public curvedetail(CurveDetails curveDetail){
-		this.gradientConstant = curveDetail.gradientConstant;
-		this.x_displacement = curveDetail.x_displacement;
-		this.equilibrium_x = curveDetail.equilibrium_x;
-		this.equilibrium_y = curveDetail.equilibrium_y;
-		this.y_intercept = curveDetail.y_intercept;
-	}
+    public Dictionary<string, Resources> GetResourceInfo()
+    {
+        return resourceList;
+    }
 }

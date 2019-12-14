@@ -7,6 +7,11 @@
 
 	private int totalSpent = 0;
 
+    public Inventory()
+    {
+        quantity = 0;
+    }
+
 	public int calculateAveragePrice(){
 		return  quantity > 0 ? totalSpent / quantity : 0;
 	}

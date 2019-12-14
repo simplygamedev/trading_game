@@ -9,22 +9,24 @@ using UnityEngine;
 
 public class StraightCurve : Curve 
 {
-	public StraightCurve (curvedetail curveDetails) : base (curveDetails){}
+	public StraightCurve (float gradientConstant, float x_displacement, float equilibrium_y, float equilibrium_x) : base (gradientConstant, x_displacement, equilibrium_y, equilibrium_x) {
+        InitializeYDisplacement();
+    }
 		
-	public override int calculateY(int x){
-		return (int)(curveDetails.gradientConstant * x + y_displacement);
+	public override float calculateY(int x){
+		return (gradientConstant * x + y_displacement);
 	}
 
-	protected override int calculateYDisplacement(){
-		return (int)(curveDetails.equilibrium_y - curveDetails.gradientConstant * curveDetails.equilibrium_x);
+	protected override void InitializeYDisplacement(){
+		y_displacement = equilibrium_y - gradientConstant * equilibrium_x;
 	}
 
 	public override float GetGradient(){
-		return curveDetails.gradientConstant;
+		return gradientConstant;
 	}
 
 	public override float calculateAreaUnderCurve(int initialX, int finalX){	
-		return (float)((curveDetails.gradientConstant * Math.Pow (initialX, 2) / 2 + y_displacement * initialX) - (curveDetails.gradientConstant * Math.Pow (finalX, 2) / 2 + y_displacement * finalX));
+		return (float)((gradientConstant * Math.Pow (initialX, 2) / 2 + y_displacement * initialX) - (gradientConstant * Math.Pow (finalX, 2) / 2 + y_displacement * finalX));
 	}
 
 }
