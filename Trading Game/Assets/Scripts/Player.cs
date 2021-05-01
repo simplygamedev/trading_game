@@ -5,8 +5,7 @@ public class Player
 {
 	public int gold = 100;
 	StringBuilder sb = new StringBuilder();
-
-	public Dictionary<string, Inventory> inventories = new Dictionary<string, Inventory> ();
+    public Dictionary<string, Inventory> inventories = new Dictionary<string, Inventory>();
 
 	public bool BuyResource(string resourceName, int totalPrice, int totalQty){
         checkHasInventoryItem(resourceName);
@@ -25,6 +24,15 @@ public class Player
             inventories.Add(resourceName, new Inventory());
     }
 
+    /// <summary>
+    /// Sell resources specified by resourceName, 
+    /// Total gold to earn from the sell specified by totalPrice,
+    /// and total quantity to sell specified by totalQty
+    /// </summary>
+    /// <param name="resourceName"></param>
+    /// <param name="totalPrice"></param>
+    /// <param name="totalQty"></param>
+    /// <returns>Returns a boolean to show if the attempt to sell the resource was successful or not</returns>
 	public bool SellResources(string resourceName, int totalPrice, int totalQty){
         if (inventories.ContainsKey(resourceName) && inventories[resourceName].quantity >=totalQty)
         {
@@ -35,7 +43,7 @@ public class Player
         return false;
 	}
 
-	public string ShowPlayerInfo(){
+	public string getPlayerInfo(){
         sb.Clear();
         foreach (var item in inventories)
         {
