@@ -1,0 +1,38 @@
+[
+  {
+    "Name": "Beer",
+    "InitialAmount": "80",
+    "Consumption": "3",
+    "Production": "8",
+    "EquilibriumPrice": "50",
+    "EquilibriumQty": "60",
+    "PriceElasticity": "-1"
+  },
+  {
+    "Name": "Grain",
+    "InitialAmount": "30",
+    "Consumption": "3",
+    "Production": "1",
+    "EquilibriumPrice": "35",
+    "EquilibriumQty": "60",
+    "PriceElasticity": "-1"
+  },
+  {
+    "Name": "Iron",
+    "InitialAmount": "30",
+    "Consumption": "3",
+    "Production": "1",
+    "EquilibriumPrice": "100",
+    "EquilibriumQty": "60",
+    "PriceElasticity": "-0.01"
+  },
+  {
+    "Name": "Fish",
+    "InitialAmount": "50",
+    "Consumption": "3",
+    "Production": "6",
+    "EquilibriumPrice": "40",
+    "EquilibriumQty": "50",
+    "PriceElasticity": "-0.01"
+  }
+]

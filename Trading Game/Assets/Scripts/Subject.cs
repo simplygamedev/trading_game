@@ -11,17 +11,29 @@ public abstract class Subject<T>
 	}
 
 	public void setState(T state) {
+        T prevState = this.state;
 		this.state = state;
-		notifyAllObservers();
+		notifyAllObservers(prevState, this.state);
 	}
 
 	public void attach(Observer<T> observer){
 		observers.Add(observer);		
 	}
 
-	public void notifyAllObservers(){
+	public void notifyAllObservers(T prevState, T currentState)
+    {
 		foreach (Observer<T> observer in observers) {
-			observer.update();
+			observer.update(prevState,state);
 		}
 	} 
+
+    public bool removeObserver(Observer<T> observer)
+    {
+        return observers.Remove(observer);
+    }
+
+    public void removeAllObservers()
+    {
+        observers.RemoveAll((observer)=> { return true; });
+    }
 }

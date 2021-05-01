@@ -6,18 +6,11 @@ public class Player
 	public int gold = 100;
 	StringBuilder sb = new StringBuilder();
 
-	public Player()
-    {
-        foreach (var resource in Market.resourceNames)
-        {
-            inventories.Add(resource, new Inventory());
-        }
-	}
-
 	public Dictionary<string, Inventory> inventories = new Dictionary<string, Inventory> ();
 
 	public bool BuyResource(string resourceName, int totalPrice, int totalQty){
-        if(gold>=totalPrice && inventories.ContainsKey(resourceName))
+        checkHasInventoryItem(resourceName);
+        if (gold>=totalPrice && inventories.ContainsKey(resourceName))
         {
             gold -= totalPrice;
             inventories[resourceName].Buy(totalQty, totalPrice);
@@ -25,6 +18,12 @@ public class Player
         }
         return false;
 	}
+
+    private void checkHasInventoryItem(string resourceName)
+    {
+        if(!inventories.ContainsKey(resourceName))
+            inventories.Add(resourceName, new Inventory());
+    }
 
 	public bool SellResources(string resourceName, int totalPrice, int totalQty){
         if (inventories.ContainsKey(resourceName) && inventories[resourceName].quantity >=totalQty)

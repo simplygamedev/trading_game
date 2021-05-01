@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -294,6 +294,21 @@ Prefab:
       propertyPath: m_Name
       value: Luebeck
       objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: GrainInitialAmount
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: GrainProduction
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: BeerProduction
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}
   m_IsPrefabParent: 0
@@ -348,7 +363,37 @@ Prefab:
     - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
         type: 2}
       propertyPath: IronInitialAmount
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: GrainProduction
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: BeerInitialAmount
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: BeerProduction
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: IronProduction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: BeerConsumption
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907649128841144, guid: 52a9acf8b9edd50438bea9066effc967,
+        type: 2}
+      propertyPath: IronConsumption
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52a9acf8b9edd50438bea9066effc967, type: 2}

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
+﻿using System;
 
 /// <summary>
 /// Gradient Constant should always be negative

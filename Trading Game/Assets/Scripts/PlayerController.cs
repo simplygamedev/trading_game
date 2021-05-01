@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
     Player player = new Player();
+    StringBuilder sb = new StringBuilder();
 
     private string town = "Luebeck";
 
@@ -18,8 +20,9 @@ public class PlayerController : MonoBehaviour {
 
     private void OnGUI()
     {
-        GUILayout.Box(string.Format("Player Gold:{0}", player.gold));
-        GUILayout.Box(string.Format("Selected Town:{0}", town));
+        GUILayout.Box($"Player Gold:{player.gold}");
+        displayPlayerResources();
+        GUILayout.Box($"Selected Town:{town}");
         foreach (var resource in Market.resourceNames)
         {
             showResource(town, resource);
@@ -55,5 +58,21 @@ public class PlayerController : MonoBehaviour {
             }
         }
         GUILayout.EndHorizontal();
+    }
+
+    private void displayPlayerResources()
+    {
+        if (player.inventories.Keys.Count > 0)
+        {
+            sb.Clear();
+            sb.Append("Player Resources:\n");
+
+            foreach (var resource in player.inventories.Keys)
+            {
+                sb.AppendFormat("{0}: {1}\n", resource, player.inventories[resource].quantity);
+            }
+
+            GUILayout.Box(sb.ToString());
+        }
     }
 }
